@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitor de Atividades</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Monitor de Atividades</h1>
+
+      <section class="card">
+        <h2>Nova atividade</h2>
+        <form id="activity-form">
+          <label for="title">Descrição</label>
+          <input id="title" name="title" placeholder="Ex.: estudar JavaScript" required />
+
+          <label for="startedAt">Início</label>
+          <input id="startedAt" name="startedAt" type="datetime-local" required />
+
+          <label for="endedAt">Fim</label>
+          <input id="endedAt" name="endedAt" type="datetime-local" required />
+
+          <button type="submit">Salvar atividade concluída</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="section-header">
+          <h2>Atividades concluídas hoje</h2>
+          <button id="clear-storage" class="danger">Limpar localStorage</button>
+        </div>
+        <ul id="today-list" class="list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Atividades que você demorou mais</h2>
+        <p class="hint">Top 5 por duração total.</p>
+        <ul id="longest-list" class="list"></ul>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
