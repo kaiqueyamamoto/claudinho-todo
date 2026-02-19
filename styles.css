@@ -1,0 +1,15 @@
+body {
+  min-height: 100vh;
+}
+
+.metric-box {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+#task-list .list-group-item {
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+#task-list small {
+  color: #6c757d;
+}
