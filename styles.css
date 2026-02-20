@@ -13,3 +13,7 @@ body {
 #task-list small {
   color: #6c757d;
 }
+
+#pomodoro-counter {
+  font-variant-numeric: tabular-nums;
+}
