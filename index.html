@@ -16,7 +16,7 @@
     <main class="container py-4 py-md-5">
       <div class="row g-4">
         <section class="col-12 col-lg-4">
-          <div class="card border-0 shadow-sm h-100">
+          <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
               <h1 class="h4 mb-3">Nova atividade</h1>
               <form id="task-form" class="vstack gap-3">
@@ -41,6 +41,53 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Adicionar</button>
               </form>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h2 class="h5 mb-3">Pomodoro</h2>
+              <div class="text-center p-3 rounded-3 bg-danger-subtle mb-3">
+                <div id="pomodoro-counter" class="display-6 fw-bold">25:00</div>
+                <div class="text-muted">Estado: <span id="pomodoro-state">Parado</span></div>
+                <div class="small text-muted">Ciclo: <span id="pomodoro-cycle">0/4</span></div>
+              </div>
+
+              <div class="d-grid gap-2 d-sm-flex mb-3">
+                <button id="pomodoro-start" type="button" class="btn btn-danger">Iniciar</button>
+                <button id="pomodoro-pause" type="button" class="btn btn-outline-secondary">Pausar</button>
+                <button id="pomodoro-resume" type="button" class="btn btn-outline-success">Retomar</button>
+                <button id="pomodoro-reset" type="button" class="btn btn-outline-dark">Resetar</button>
+              </div>
+
+              <form id="pomodoro-config-form" class="row g-2">
+                <div class="col-6">
+                  <label class="form-label" for="focusDuration">Foco (min)</label>
+                  <input id="focusDuration" name="focusDuration" type="number" min="1" class="form-control" />
+                </div>
+                <div class="col-6">
+                  <label class="form-label" for="shortBreakDuration">Pausa curta (min)</label>
+                  <input id="shortBreakDuration" name="shortBreakDuration" type="number" min="1" class="form-control" />
+                </div>
+                <div class="col-6">
+                  <label class="form-label" for="longBreakDuration">Pausa longa (min)</label>
+                  <input id="longBreakDuration" name="longBreakDuration" type="number" min="1" class="form-control" />
+                </div>
+                <div class="col-6">
+                  <label class="form-label" for="cyclesBeforeLongBreak">Ciclos p/ pausa longa</label>
+                  <input id="cyclesBeforeLongBreak" name="cyclesBeforeLongBreak" type="number" min="1" class="form-control" />
+                </div>
+                <div class="col-12 d-grid">
+                  <button class="btn btn-outline-primary" type="submit">Salvar configuração</button>
+                </div>
+              </form>
+
+              <p id="pomodoro-notification-warning" class="alert alert-warning mt-3 mb-2 d-none py-2">
+                Notificações desativadas. O app usará aviso visual/sonoro.
+              </p>
+              <button id="pomodoro-enable-notifications" type="button" class="btn btn-sm btn-outline-warning">
+                Ativar notificações
+              </button>
             </div>
           </div>
         </section>
@@ -95,7 +142,9 @@
       </div>
     </main>
 
-    <script>
+    <script type="module">
+      import { initPomodoroPage } from './src/pages/Pomodoro.js';
+
       const STORAGE_KEY = 'todo-atividades';
       const taskForm = document.getElementById('task-form');
       const taskList = document.getElementById('task-list');
@@ -208,10 +257,6 @@
         const action = event.target.dataset.action;
         const id = Number(event.target.dataset.id);
 
-        if (action === 'toggle') {
-          toggleTask(id);
-        }
-
         if (action === 'delete') {
           deleteTask(id);
         }
@@ -226,6 +271,7 @@
       clearCompletedBtn.addEventListener('click', clearCompleted);
 
       renderTasks();
+      initPomodoroPage();
     </script>
   </body>
 </html>
